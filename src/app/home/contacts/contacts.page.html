@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Contacts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar show-cancel-button="never" placeholder="Search number" (ionInput)="handleInput($event)"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let result of searchPrompt.length > 0 ? searchedContacts :  results">
+      <ion-label>{{ result?.name.display }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list style="margin-top: -10px;">
+
+    <ion-item-sliding *ngFor="let contact of contacts">
+      <ion-item>
+
+      <ion-icon name="person-circle-outline" style="padding-right: 20px; width: 40px; height: 40px;"></ion-icon>
+      <ion-label>{{ formatContactDetails(contact) }}</ion-label>
+      
+      </ion-item>
+      
+      <ion-item-options side="end" >
+        <ion-item-option>
+          <ion-icon name="call" (click)="call(contact)" style="padding: 10px;"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
